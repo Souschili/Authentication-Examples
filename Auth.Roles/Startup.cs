@@ -22,7 +22,7 @@ namespace Auth.Roles
                     conf.AccessDeniedPath = "/Home/AccessDenide";
                 });
 
-            // here we add schema
+            // here we add policy and roles as a claims
             services.AddAuthorization(conf =>
             {
                 conf.AddPolicy("Administrator", builder =>
@@ -33,6 +33,13 @@ namespace Auth.Roles
                 {
                     builder.RequireClaim(ClaimTypes.Role, "Manager");
                 });
+                // this policy contain two Role claim and useful for controlers which has attribute Policy=""
+                conf.AddPolicy("Multiple", builder =>
+                {
+                    builder.RequireClaim(ClaimTypes.Role,"Manager");
+                    builder.RequireClaim(ClaimTypes.Role,"Administrator");
+                });
+
             });
 
 
