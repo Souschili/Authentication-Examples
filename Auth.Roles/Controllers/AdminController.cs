@@ -17,7 +17,7 @@ namespace Auth.Basic.Controllers
             return View();
         }
 
-        [Authorize(Roles ="Administrator")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Administrator()
         {
             return View();
@@ -25,6 +25,12 @@ namespace Auth.Basic.Controllers
 
         [Authorize(Roles = "Manager")]
         public IActionResult Manager()
+        {
+            return View();
+        }
+
+        [Authorize(Policy = "Multiple")]
+        public IActionResult ForAll()
         {
             return View();
         }
@@ -57,7 +63,7 @@ namespace Auth.Basic.Controllers
                 //add claim with role
                 // with two claims user has access to all pages with Administrator and Manager claims role
                 new Claim(ClaimTypes.Role, "Manager"),
-                new Claim(ClaimTypes.Role, "Administrator")
+                //new Claim(ClaimTypes.Role, "Administrator")
             };
 
             //обязательный параметр для аутентификации клайм айдентити

@@ -29,15 +29,18 @@ namespace Auth.Roles
                 {
                     builder.RequireRole(ClaimTypes.Role, "Administrator");
                 });
-                conf.AddPolicy("Manager", builder =>
-                {
-                    builder.RequireClaim(ClaimTypes.Role, "Manager");
-                });
-                // this policy contain two Role claim and useful for controlers which has attribute Policy=""
+
+                //conf.AddPolicy("Manager", builder =>
+                //{
+                //    builder.RequireClaim(ClaimTypes.Role, "Manager");
+                //});
+
+                // this policy contain two Role claim and useful for controlers which has attribute Policy="Multiple"
                 conf.AddPolicy("Multiple", builder =>
                 {
-                    builder.RequireClaim(ClaimTypes.Role,"Manager");
-                    builder.RequireClaim(ClaimTypes.Role,"Administrator");
+                    builder.RequireAssertion(x => x.User.HasClaim(ClaimTypes.Role,"Manager") ||
+                    x.User.HasClaim(ClaimTypes.Role,"Administrator")
+                    );
                 });
 
             });
