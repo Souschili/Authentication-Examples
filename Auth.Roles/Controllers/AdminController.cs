@@ -17,6 +17,19 @@ namespace Auth.Basic.Controllers
             return View();
         }
 
+        [Authorize(Roles ="Administrator")]
+        public IActionResult Administrator()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Manager")]
+        public IActionResult Manager()
+        {
+            return View();
+        }
+
+
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
