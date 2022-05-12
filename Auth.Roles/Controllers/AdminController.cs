@@ -17,18 +17,21 @@ namespace Auth.Basic.Controllers
             return View();
         }
 
+
+        // here only administrator need uncomment claim in list of claims 
         [Authorize(Roles = "Administrator")]
         public IActionResult Administrator()
         {
             return View();
         }
-
+        // here only Manager
         [Authorize(Roles = "Manager")]
         public IActionResult Manager()
         {
             return View();
         }
 
+        // here you can go with all claims
         [Authorize(Policy = "Multiple")]
         public IActionResult ForAll()
         {
