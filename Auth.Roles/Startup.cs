@@ -12,9 +12,17 @@ namespace Auth.Roles
 {
     public class Startup
     {
-       
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("Cookie")
+                .AddCookie("Cookie", conf =>
+                {
+                    conf.LoginPath = "/Admin/Login";
+                });
+
+
+            services.AddAuthorization();
+
             services.AddControllersWithViews();
         }
 
@@ -27,6 +35,10 @@ namespace Auth.Roles
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
