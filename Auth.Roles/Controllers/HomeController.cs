@@ -6,6 +6,8 @@ namespace Auth.Basic.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Name = User.Identity.Name;
+            ViewBag.Auth = User.Identity.IsAuthenticated;
             return View();
         }
     }

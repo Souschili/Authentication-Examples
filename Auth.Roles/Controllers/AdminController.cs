@@ -38,7 +38,8 @@ namespace Auth.Basic.Controllers
             //список клаймов
             var claims = new List<Claim>
             {
-                new Claim("Demo","Value")
+                // добавляем клайм именованый
+                new Claim(ClaimTypes.Name,viewModel.Login)
             };
 
             //обязательный параметр для аутентификации клайм айдентити
