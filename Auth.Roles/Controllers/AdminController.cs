@@ -52,7 +52,12 @@ namespace Auth.Basic.Controllers
             var claims = new List<Claim>
             {
                 // добавляем клайм именованый
-                new Claim(ClaimTypes.Name,viewModel.Login)
+                new Claim(ClaimTypes.Name,viewModel.Login),
+
+                //add claim with role
+                // with two claims user has access to all pages with Administrator and Manager claims role
+                new Claim(ClaimTypes.Role, "Manager"),
+                new Claim(ClaimTypes.Role, "Administrator")
             };
 
             //обязательный параметр для аутентификации клайм айдентити
