@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Auth.Roles
@@ -20,8 +21,21 @@ namespace Auth.Roles
                     conf.LoginPath = "/Admin/Login";
                 });
 
+            // here we add schema
+            services.AddAuthorization(conf =>
+            {
+                conf.AddPolicy("Administrator", builder =>
+                {
+                    builder.RequireRole(ClaimTypes.Role, "Administrator");
+                });
+                conf.AddPolicy("Manager", builder =>
+                {
+                    builder.RequireClaim(ClaimTypes.Role, "Manager");
+                });
+            });
 
-            services.AddAuthorization();
+
+
 
             services.AddControllersWithViews();
         }
