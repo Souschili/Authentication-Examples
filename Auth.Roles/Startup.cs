@@ -19,6 +19,7 @@ namespace Auth.Roles
                 .AddCookie("Cookie", conf =>
                 {
                     conf.LoginPath = "/Admin/Login";
+                    conf.AccessDeniedPath = "/Home/AccessDenide";
                 });
 
             // here we add schema
