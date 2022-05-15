@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Auth.Identity.Data;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,7 +12,11 @@ namespace Auth.Identity.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-
+        private ApplicationDbContext _context;
+        public AdminController(ApplicationDbContext context)
+        {
+            this._context = context;
+        }
 
         public IActionResult Index()
         {
@@ -56,6 +62,9 @@ namespace Auth.Identity.Controllers
                 //возращаем модель на страницк запроса
                 return View(viewModel);
             }
+
+            // get user from DB
+            var user=await _context.Users.SingleOrDefaultAsync(x=> x.UserName==viewModel.Login && x.Password==viewModel.Password);
 
             //список клаймов
             var claims = new List<Claim>
