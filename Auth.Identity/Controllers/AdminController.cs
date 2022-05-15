@@ -65,7 +65,7 @@ namespace Auth.Identity.Controllers
 
             // get user from DB
             var user=await _context.Users
-                .SingleOrDefaultAsync(x=> x.UserName==viewModel.Login && x.Password==viewModel.Password);
+                .SingleOrDefaultAsync(x=> x.UserName==viewModel.Login );
 
             //если пользователя нет
             if (user == null)

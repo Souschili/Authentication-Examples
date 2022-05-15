@@ -44,7 +44,7 @@ namespace Auth.Identity
             var user = new ApplicationUser
             {
                 UserName = "Xaos",
-                Password = "123",
+               
                 FirstName = "Orkhan",
                 LastName = "Aliyev"
             };
