@@ -1,5 +1,8 @@
+using Auth.Identity.Data;
+using Auth.Identity.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,7 +16,15 @@ namespace Auth.Identity
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                DataBaseInitializer.Init(scope.ServiceProvider);
+            }
+
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +33,24 @@ namespace Auth.Identity
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+    }
+
+    public static class DataBaseInitializer
+    {
+        public static void Init(IServiceProvider serviceProvider)
+        {
+            var context = serviceProvider.GetService<ApplicationDbContext>();
+
+            var user = new ApplicationUser
+            {
+                UserName = "Xaos",
+                Password = "123",
+                FirstName = "Orkhan",
+                LastName = "Aliyev"
+            };
+
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
     }
 }

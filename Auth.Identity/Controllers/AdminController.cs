@@ -64,7 +64,15 @@ namespace Auth.Identity.Controllers
             }
 
             // get user from DB
-            var user=await _context.Users.SingleOrDefaultAsync(x=> x.UserName==viewModel.Login && x.Password==viewModel.Password);
+            var user=await _context.Users
+                .SingleOrDefaultAsync(x=> x.UserName==viewModel.Login && x.Password==viewModel.Password);
+
+            //если пользователя нет
+            if (user == null)
+            {
+                ModelState.AddModelError("", "User not Found");
+                return View(viewModel);
+            }
 
             //список клаймов
             var claims = new List<Claim>
