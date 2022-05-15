@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Auth.Identitu
+namespace Auth.Identity
 {
     public class Program
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Auth.Basic.Controllers
+namespace Auth.Identity.Controllers
 {
     public class HomeController : Controller
     {
