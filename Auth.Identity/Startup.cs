@@ -1,4 +1,5 @@
 using Auth.Identity.Data;
+using Auth.Identity.Data.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,8 @@ namespace Auth.Identity
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(conf => conf.UseInMemoryDatabase("Memory"));
+            services.AddDbContext<ApplicationDbContext>(conf => conf.UseInMemoryDatabase("Memory"))
+                .AddIdentity<ApplicationUser, ApplicationRole>();
             
             services.AddAuthentication("Cookie")
                 .AddCookie("Cookie", conf =>
