@@ -1,6 +1,7 @@
 using Auth.Identity.Data;
 using Auth.Identity.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,18 +40,21 @@ namespace Auth.Identity
     {
         public static void Init(IServiceProvider serviceProvider)
         {
-            var context = serviceProvider.GetService<ApplicationDbContext>();
+            // var context = serviceProvider.GetService<ApplicationDbContext>();
+
+            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
 
             var user = new ApplicationUser
             {
-                UserName = "Xaos",
-               
-                FirstName = "Orkhan",
-                LastName = "Aliyev"
+                UserName="Xaos",
+                FirstName="Orkhan",
+                LastName="Aliyev"
             };
 
-            context.Users.Add(user);
-            context.SaveChanges();
+
+            userManager.CreateAsync(user,"123456").Wait();
+            //context.Users.Add(user);
+            //context.SaveChanges();
         }
     }
 }

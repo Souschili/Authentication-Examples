@@ -14,14 +14,21 @@ namespace Auth.Identity
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(conf => conf.UseInMemoryDatabase("Memory"))
-                .AddIdentity<ApplicationUser, ApplicationRole>();
-            
-            services.AddAuthentication("Cookie")
-                .AddCookie("Cookie", conf =>
-                {
-                    conf.LoginPath = "/Admin/Login";
-                    conf.AccessDeniedPath = "/Home/AccessDenide";
-                });
+                .AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.LoginPath = "/Admin/Login";
+                cfg.AccessDeniedPath = "/Home/AccessDenide";
+            });
+
+            //services.AddAuthentication("Cookie")
+            //    .AddCookie("Cookie", conf =>
+            //    {
+            //        conf.LoginPath = "/Admin/Login";
+            //        conf.AccessDeniedPath = "/Home/AccessDenide";
+            //    });
 
             // here we add policy and roles as a claims
             services.AddAuthorization(conf =>

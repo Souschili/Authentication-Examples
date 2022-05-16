@@ -1,6 +1,8 @@
 ﻿using Auth.Identity.Data;
+using Auth.Identity.Data.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -12,10 +14,13 @@ namespace Auth.Identity.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private ApplicationDbContext _context;
-        public AdminController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public AdminController(UserManager<ApplicationUser> manager,
+            SignInManager<ApplicationUser>  signIn)
         {
-            this._context = context;
+            _userManager = manager;
+            _signInManager = signIn;
         }
 
         public IActionResult Index()
@@ -64,8 +69,7 @@ namespace Auth.Identity.Controllers
             }
 
             // get user from DB
-            var user=await _context.Users
-                .SingleOrDefaultAsync(x=> x.UserName==viewModel.Login );
+            var user =await _userManager.FindByNameAsync(viewModel.Login);
 
             //если пользователя нет
             if (user == null)
@@ -74,27 +78,40 @@ namespace Auth.Identity.Controllers
                 return View(viewModel);
             }
 
-            //список клаймов
-            var claims = new List<Claim>
+            var rezult=await _signInManager.PasswordSignInAsync(user.UserName,viewModel.Password,false,false);
+
+            if (rezult.Succeeded)
             {
-                // добавляем клайм именованый
-                new Claim(ClaimTypes.Name,viewModel.Login),
+                // если все хорошо то редиректим 
+                return Redirect(viewModel.ReturnUrl);
+            }
 
-                //add claim with role
-                // with two claims user has access to all pages with Administrator and Manager claims role
-                new Claim(ClaimTypes.Role, "Manager"),
-                //new Claim(ClaimTypes.Role, "Administrator")
-            };
 
-            //обязательный параметр для аутентификации клайм айдентити
-            var claimIdentity=new ClaimsIdentity(claims,"Cookie");
+            return View(viewModel);
 
-            //аутентификация через клаймы
-            ClaimsPrincipal claimPrincipal=new ClaimsPrincipal(claimIdentity);
-            await HttpContext.SignInAsync("Cookie", claimPrincipal);
+            ////список клаймов
+            //var claims = new List<Claim>
+            //{
+            //    // добавляем клайм именованый
+            //    new Claim(ClaimTypes.Name,viewModel.Login),
 
-            // если все хорошо то редиректим 
-            return Redirect(viewModel.ReturnUrl);
+            //    //add claim with role
+            //    // with two claims user has access to all pages with Administrator and Manager claims role
+            //    new Claim(ClaimTypes.Role, "Manager"),
+            //    //new Claim(ClaimTypes.Role, "Administrator")
+            //};
+
+            ////обязательный параметр для аутентификации клайм айдентити
+            //var claimIdentity=new ClaimsIdentity(claims,"Cookie");
+
+            ////аутентификация через клаймы
+            //ClaimsPrincipal claimPrincipal=new ClaimsPrincipal(claimIdentity);
+            //await HttpContext.SignInAsync("Cookie", claimPrincipal);
+
+
+           
+
+            
         }
 
 
