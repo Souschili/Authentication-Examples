@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Auth.Identity
@@ -54,9 +55,9 @@ namespace Auth.Identity
 
             var result=userManager.CreateAsync(user,"123456").GetAwaiter().GetResult();
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
             {
-
+                var res=userManager.AddClaimAsync(user,new Claim(ClaimTypes.Role, "Manager")).GetAwaiter().GetResult();
             }
 
             //context.Users.Add(user);

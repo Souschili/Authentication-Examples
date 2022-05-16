@@ -7,5 +7,8 @@
 <div>
     <p>isAuthrnticate : @ViewBag.Auth</p>
     <p>UserName : @ViewBag.Name </p>
-
+    @foreach (var item in User.Claims)
+   {
+       <p>@item.Type</p>
+   }
 </div>

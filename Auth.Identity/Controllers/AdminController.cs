@@ -119,7 +119,8 @@ namespace Auth.Identity.Controllers
         public async Task<IActionResult> LogOffAsync()
         {
             //разлогин пользователя и возврат на домашнюю страницу
-            await HttpContext.SignOutAsync("Cookie");
+            //await HttpContext.SignOutAsync("Cookie");
+            await _signInManager.SignOutAsync();
 
 
             return Redirect("/Home/Index");
