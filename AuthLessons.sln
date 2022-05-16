@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Basic", "Auth.Basic\Au
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Roles", "Auth.Roles\Auth.Roles.csproj", "{8656EB1E-E07E-4775-B9E3-FB1396ED544A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Identity", "Auth.Identity\Auth.Identity.csproj", "{CD5EECB0-1419-4FC8-9412-AEB3E4533713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Identity", "Auth.Identity\Auth.Identity.csproj", "{CD5EECB0-1419-4FC8-9412-AEB3E4533713}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basic", "Basic", "{8F44A362-2654-4415-89F2-FB65CC81FAC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A3C4E0A1-8D9E-499D-BE73-EF0411426F23} = {8F44A362-2654-4415-89F2-FB65CC81FAC4}
+		{8656EB1E-E07E-4775-B9E3-FB1396ED544A} = {8F44A362-2654-4415-89F2-FB65CC81FAC4}
+		{CD5EECB0-1419-4FC8-9412-AEB3E4533713} = {8F44A362-2654-4415-89F2-FB65CC81FAC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {950468D8-0884-47AE-9B4C-88709E02020A}
