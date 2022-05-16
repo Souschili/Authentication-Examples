@@ -52,7 +52,13 @@ namespace Auth.Identity
             };
 
 
-            userManager.CreateAsync(user,"123456").Wait();
+            var result=userManager.CreateAsync(user,"123456").GetAwaiter().GetResult();
+
+            if (!result.Succeeded)
+            {
+
+            }
+
             //context.Users.Add(user);
             //context.SaveChanges();
         }
