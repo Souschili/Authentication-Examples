@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basic", "Basic", "{8F44A362
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity4", "Identity4", "{FD3EFC5B-FC49-452F-BAD1-A5561937559F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Orders.Api", "Auth.Orders.Api\Auth.Orders.Api.csproj", "{4F71B300-AC15-4338-A230-B9EB10AD0AFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Orders.Api", "Auth.Orders.Api\Auth.Orders.Api.csproj", "{4F71B300-AC15-4338-A230-B9EB10AD0AFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Users.Api", "Auth.Users.Api\Auth.Users.Api.csproj", "{A82A9F7D-59CC-4E08-8A5B-256EDFA04227}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{4F71B300-AC15-4338-A230-B9EB10AD0AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F71B300-AC15-4338-A230-B9EB10AD0AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F71B300-AC15-4338-A230-B9EB10AD0AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82A9F7D-59CC-4E08-8A5B-256EDFA04227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82A9F7D-59CC-4E08-8A5B-256EDFA04227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82A9F7D-59CC-4E08-8A5B-256EDFA04227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82A9F7D-59CC-4E08-8A5B-256EDFA04227}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{8656EB1E-E07E-4775-B9E3-FB1396ED544A} = {8F44A362-2654-4415-89F2-FB65CC81FAC4}
 		{CD5EECB0-1419-4FC8-9412-AEB3E4533713} = {8F44A362-2654-4415-89F2-FB65CC81FAC4}
 		{4F71B300-AC15-4338-A230-B9EB10AD0AFE} = {FD3EFC5B-FC49-452F-BAD1-A5561937559F}
+		{A82A9F7D-59CC-4E08-8A5B-256EDFA04227} = {FD3EFC5B-FC49-452F-BAD1-A5561937559F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {950468D8-0884-47AE-9B4C-88709E02020A}
