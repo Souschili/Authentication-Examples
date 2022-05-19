@@ -9,7 +9,7 @@ namespace Auth.Orders.Api.Controllers
             return View();
         }
 
-        public string GetSecret()=>
+        public string Secret()=>
             "Get secret from Order Api";
     }
 }

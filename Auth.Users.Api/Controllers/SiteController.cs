@@ -8,5 +8,11 @@ namespace Auth.Users.Api.Controllers
         {
             return View();
         }
+
+        public IActionResult GetOrders()
+        {
+            ViewBag.message = "Test Data";
+            return View();
+        }
     }
 }
