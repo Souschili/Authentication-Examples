@@ -8,5 +8,8 @@ namespace Auth.Orders.Api.Controllers
         {
             return View();
         }
+
+        public string GetSecret()=>
+            "Get secret from Order Api";
     }
 }
