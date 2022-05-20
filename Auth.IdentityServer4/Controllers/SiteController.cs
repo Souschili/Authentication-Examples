@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Auth.Orders.Api.Controllers
+namespace Auth.IdentityServer4.Controllers
 {
-    [Route("[controller]")]
     public class SiteController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
-        [Route("[action]")]
-        public string Secret()=>
-            "Get secret from Order Api !!!!";
     }
 }
