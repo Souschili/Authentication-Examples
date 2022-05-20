@@ -1,7 +1,9 @@
+using Auth.IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 
 namespace Auth.IdentityServer4
 {
@@ -11,6 +13,13 @@ namespace Auth.IdentityServer4
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddIdentityServer()
+                .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddDeveloperSigningCredential()
+                ;
+
         }
 
 
@@ -22,6 +31,9 @@ namespace Auth.IdentityServer4
             }
 
             app.UseRouting();
+
+
+            app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
             {

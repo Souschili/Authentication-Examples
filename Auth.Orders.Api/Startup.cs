@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,15 @@ namespace Auth.Orders.Api
       
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, cfg =>
+                {
+                    cfg.Authority = "https://localhost:8001"; //сервер аутентификации
+                    cfg.Audience = "OrdersApi";               //область защиты (смотри в настройке сервера айдентити)
+                });
+                
+                
+            
             services.AddControllersWithViews();
         }
 

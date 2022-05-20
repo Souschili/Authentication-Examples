@@ -16,17 +16,10 @@ namespace Auth.Identity
 {
     public class Program
     {
+
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-
-            using (var scope = host.Services.CreateScope())
-            {
-                DataBaseInitializer.Init(scope.ServiceProvider);
-            }
-
-
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -36,32 +29,5 @@ namespace Auth.Identity
                     webBuilder.UseStartup<Startup>();
                 });
     }
-
-    public static class DataBaseInitializer
-    {
-        public static void Init(IServiceProvider serviceProvider)
-        {
-            // var context = serviceProvider.GetService<ApplicationDbContext>();
-
-            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
-
-            var user = new ApplicationUser
-            {
-                UserName="Xaos",
-                FirstName="Orkhan",
-                LastName="Aliyev"
-            };
-
-
-            var result=userManager.CreateAsync(user,"123456").GetAwaiter().GetResult();
-
-            if (result.Succeeded)
-            {
-                var res=userManager.AddClaimAsync(user,new Claim(ClaimTypes.Role, "Manager")).GetAwaiter().GetResult();
-            }
-
-            //context.Users.Add(user);
-            //context.SaveChanges();
-        }
-    }
 }
+
