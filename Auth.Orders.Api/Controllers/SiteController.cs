@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Auth.Orders.Api.Controllers
 {
@@ -11,6 +12,7 @@ namespace Auth.Orders.Api.Controllers
         }
 
         [Route("[action]")]
+        [Authorize]
         public string Secret()=>
             "Get secret from Order Api !!!!";
     }

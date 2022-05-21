@@ -15,8 +15,9 @@ namespace Auth.IdentityServer4
             services.AddControllers();
             services.AddIdentityServer()
                 .AddInMemoryClients(Config.GetClients())
-                .AddInMemoryApiResources(Config.GetApiResources())
+                //.AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiScopes(Config.GetApiScopes())
                 .AddDeveloperSigningCredential()
                 ;
 

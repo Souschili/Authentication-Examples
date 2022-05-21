@@ -14,15 +14,15 @@ namespace Auth.IdentityServer4.Configuration
                     ClientId="client_id",
                     ClientSecrets={new Secret("client_secret".ToSha512())},
 
-                    AllowedScopes={"OrderApi"},
-                    AllowedGrantTypes=GrantTypes.ClientCredentials
+                    AllowedGrantTypes=GrantTypes.ClientCredentials,
+                    AllowedScopes={"OrdersAPI"}
                 }
             };
 
         public static IEnumerable<ApiResource> GetApiResources() =>
             new List<ApiResource>
             {
-                new ApiResource("OrdersApi")
+                new ApiResource("OrdersAPI")
             };
 
 
@@ -31,6 +31,12 @@ namespace Auth.IdentityServer4.Configuration
             {
                 new IdentityResources.OpenId()
                
+            };
+
+        public static IEnumerable<ApiScope> GetApiScopes() =>
+            new List<ApiScope>
+            {
+                new ApiScope("OrdersAPI")
             };
 
     }

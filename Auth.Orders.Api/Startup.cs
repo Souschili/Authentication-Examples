@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Auth.Orders.Api
 {
@@ -16,7 +17,12 @@ namespace Auth.Orders.Api
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, cfg =>
                 {
                     cfg.Authority = "https://localhost:8001"; //сервер аутентификации
-                    cfg.Audience = "OrdersApi";               //область защиты (смотри в настройке сервера айдентити)
+                    cfg.Audience = "OrdersAPI";               //область защиты (смотри в настройке сервера айдентити)
+
+
+                    cfg.TokenValidationParameters = new TokenValidationParameters { ValidateAudience = false };
+
+
                 });
                 
                 
@@ -33,6 +39,10 @@ namespace Auth.Orders.Api
             }
 
             app.UseRouting();
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
