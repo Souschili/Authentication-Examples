@@ -24,9 +24,18 @@ namespace Auth.Orders.Api
 
 
                 });
-                
-                
-            
+
+            // пропускает только токены с клаймом OrdersApi
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("ApiScope", policy =>
+            //    {
+            //        policy.RequireAuthenticatedUser();
+            //        policy.RequireClaim("scope", "OrdersAPI");
+            //    });
+            //});
+
+
             services.AddControllersWithViews();
         }
 
@@ -46,7 +55,7 @@ namespace Auth.Orders.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllers();//.RequireAuthorization("ApiScope");
             });
         }
     }
